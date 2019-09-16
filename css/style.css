@@ -615,7 +615,7 @@ header {
     right: 0;
     bottom: 0;
     content: "";
-    background: rgba(0, 0, 0, 0.6);
+    /* background: rgba(0, 0, 0, 0.6); */
     position: absolute; }
   .link-thumbnail:hover h3 {
     opacity: 1;
