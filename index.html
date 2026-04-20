@@ -1,356 +1,264 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>My Pet Dora</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <title>My Pet Dora</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    #hero-bg { transition: background-image 0.8s ease-in-out; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .gallery-item img { transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item .overlay { opacity: 0; transition: opacity 0.3s ease; }
+    .gallery-item:hover .overlay { opacity: 1; }
+  </style>
+</head>
+<body class="font-sans text-stone-900 bg-white antialiased">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-
-    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-    <!-- Theme Style -->
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    
-    <header role="banner">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand absolute" href="index.html">MYPETDORA</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarsExample05">
-            <ul class="navbar-nav mx-auto pl-lg-5 pl-0">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#about-info">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#album-info">Album</a>
-              </li>
-              <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Breed</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="#">German Shepherd</a>
-                  <a class="dropdown-item" href="#">Labrador</a>
-                  <a class="dropdown-item" href="#">Rottweiler</a>
-                </div>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="#blog-info">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contact-info">Contact</a>
-              </li>
-            </ul>
-            
-          </div>
-        </div>
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/85 border-b border-stone-100/80">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-amber-500 font-extrabold text-lg tracking-[0.2em] uppercase">MyPetDora</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-500">
+        <a href="#about" class="hover:text-amber-500 transition-colors duration-200">About</a>
+        <a href="#album" class="hover:text-amber-500 transition-colors duration-200">Album</a>
+        <a href="#contact" class="hover:text-amber-500 transition-colors duration-200">Contact</a>
       </nav>
-    </header>
-    <!-- END header -->
-    
-    <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('img/dora-1.jpg');">
-        
-        <div class="container">
-          <div class="row slider-text align-items-center justify-content-center">
-            <div class="col-md-8 text-center col-sm-12 element-animate">
-              <!-- <h1>We Love Pets</h1> -->
-              <!-- <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p> -->
-              <!-- <p><a href="#" class="btn btn-white btn-outline-white">Get Started</a> <a href="#" class="btn btn-link btn-white">Download</a></p> -->
-            </div>
-          </div>
-        </div>
-
+      <button id="menu-btn" class="md:hidden text-stone-500 hover:text-stone-900 transition-colors" aria-label="Toggle menu">
+        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden border-t border-stone-100 bg-white/95 backdrop-blur-md">
+      <div class="px-6 py-5 flex flex-col gap-5 text-sm font-medium text-stone-600">
+        <a href="#about" class="hover:text-amber-500 transition-colors" onclick="closeMobileMenu()">About</a>
+        <a href="#album" class="hover:text-amber-500 transition-colors" onclick="closeMobileMenu()">Album</a>
+        <a href="#contact" class="hover:text-amber-500 transition-colors" onclick="closeMobileMenu()">Contact</a>
       </div>
+    </div>
+  </header>
 
-      <div class="slider-item" style="background-image: url('img/dora-3.jpg');">
-        <div class="container">
-          <div class="row slider-text align-items-center justify-content-center">
-            <div class="col-md-8 text-center col-sm-12 element-animate">
-              <!-- <h1>Care for dogs</h1> -->
-              <!-- <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p> -->
-              <!-- <p><a href="#" class="btn btn-white btn-outline-white">Get Started</a> <a href="#" class="btn btn-link btn-white">Download</a></p> -->
-            </div>
+  <!-- HERO -->
+  <section class="relative h-screen overflow-hidden">
+    <div id="hero-bg" class="absolute inset-0 bg-cover bg-center" style="background-image: url('img/dora-1.jpg')"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/70"></div>
+    <div class="relative h-full flex flex-col items-center justify-end pb-28 text-white text-center px-6">
+      <p class="text-xs font-semibold tracking-[0.35em] uppercase text-amber-400 mb-4">Porto, Portugal</p>
+      <h1 class="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-none mb-5">Dora</h1>
+      <p class="text-base sm:text-lg text-white/65 font-light max-w-sm">She's not just a dog. She's family.</p>
+      <a href="#about" class="mt-12 text-white/50 hover:text-white/90 transition-colors" aria-label="Scroll down">
+        <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </a>
+    </div>
+    <!-- Slide indicators -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
+      <button class="hero-dot w-2 h-2 rounded-full transition-all duration-300 bg-white/80 scale-125" data-index="0" aria-label="Slide 1"></button>
+      <button class="hero-dot w-2 h-2 rounded-full transition-all duration-300 bg-white/30" data-index="1" aria-label="Slide 2"></button>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-24 md:py-36">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-14 lg:gap-24 items-center">
+        <div class="fade-in">
+          <div class="relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/5]">
+            <img src="img/dora-2-new.jpg" alt="Dora" class="w-full h-full object-cover">
           </div>
         </div>
-        
-      </div>
-
-    </section>
-    <!-- END slider -->
-
-    <section class="section element-animate">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-4"></div>
-          <div class="col-md-8 section-heading">
-            <h2 id="about-info">It's a Dog Life</h2>
-            <p class="small-sub-heading">My story</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 mb-4">
-            <img src="img/dora-2-new.jpg" alt="Image placeholder" class="img-fluid">
-          </div>
-          <div class="col-md-4">
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-          </div>
-          <div class="col-md-4">
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-            <!-- <p><a href="#">Learn More <span class="ion-ios-arrow-right"></span></a></p> -->
-          </div>
+        <div class="fade-in">
+          <p class="text-amber-500 font-semibold text-xs tracking-[0.3em] uppercase mb-4">My Story</p>
+          <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-5" id="about-info">It's a Dog Life</h2>
+          <div class="w-10 h-1 bg-amber-500 mb-8 rounded-full"></div>
+          <p class="text-stone-500 leading-relaxed mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          <p class="text-stone-500 leading-relaxed mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+          <p class="text-stone-500 leading-relaxed">Even the all-powerful Pointing has no control about the blind texts — it is an almost unorthographic life. One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
         </div>
       </div>
-    </section>
-    
-    <!-- <section class="section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5 element-animate">
-          <div class="col-md-8 text-center">
-            <h2 class=" heading mb-4">Every Dog Needs A Good Owner</h2>
-            <p class="mb-5 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
-          </div>
-        </div>
-        <div class="row element-animate">
-          <div class="major-caousel js-carousel-1 owl-carousel">
-            <div>
-              <div class="media d-block media-custom text-center">
-                <a href="adoption-single.html"><img src="img/person_1.jpg" alt="Image Placeholder" class="img-fluid"></a>
-                <div class="media-body">
-                  <h3 class="mt-0 text-black">Mellisa Howard</h3>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="media d-block media-custom text-center">
-                <a href="adoption-single.html"><img src="img/person_2.jpg" alt="Image Placeholder" class="img-fluid"></a>
-                <div class="media-body">
-                  <h3 class="mt-0 text-black">Mike Richardson</h3>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="media d-block media-custom text-center">
-                <a href="adoption-single.html"><img src="img/person_3.jpg" alt="Image Placeholder" class="img-fluid"></a>
-                <div class="media-body">
-                  <h3 class="mt-0 text-black">Charles White</h3>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="media d-block media-custom text-center">
-                <a href="adoption-single.html"><img src="img/person_4.jpg" alt="Image Placeholder" class="img-fluid"></a>
-                <div class="media-body">
-                  <h3 class="mt-0 text-black">Laura Smith</h3>
-                </div>
-              </div>
-            </div>
-          </div>
+    </div>
+  </section>
 
-        </div>
+  <!-- ALBUM -->
+  <section id="album" class="py-24 md:py-36 bg-stone-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16 fade-in">
+        <p class="text-amber-500 font-semibold text-xs tracking-[0.3em] uppercase mb-4">Gallery</p>
+        <h2 class="text-4xl md:text-5xl font-bold" id="album-info">Album Collection</h2>
+        <p class="text-stone-400 mt-4 text-lg font-light">These are my most beautiful selfies.</p>
       </div>
-    </section> -->
-    <!-- END section -->
-
-    <section class="section border-t">
-      <div class="container">
-        <div class="row justify-content-center mb-5 element-animate">
-          <div class="col-md-8 text-center">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <h2 class=" heading mb-4" id="album-info">Album Collection</h2>
-            <p class="mb-5 lead">these are my most beautiful selfies.</p>
-          </div>
-        </div>
-
-        <div class="row no-gutters">
-          <div class="col-md-4 element-animate">
-            <a class="link-thumbnail">
-              <!-- <h3>Hi!</h3> -->
-              <!-- <span class="ion-plus icon"></span> -->
-              <img src="img/dora-2-new.jpg" class="img-fluid">
-            </a>
-          </div>
-          <div class="col-md-4 element-animate">
-            <a class="link-thumbnail">
-              <!-- <h3>Labrador</h3>
-              <span class="ion-plus icon"></span> -->
-              <img src="img/dora-4.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-          </div>
-          <div class="col-md-4 element-animate">
-            <a class="link-thumbnail">
-              <!-- <h3>Bulldog</h3>
-              <span class="ion-plus icon"></span> -->
-              <img src="img/dora-5.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-          </div>
-          <div class="col-md-4 element-animate">
-            <a class="link-thumbnail">
-              <!-- <h3>Rottweiler</h3>
-              <span class="ion-plus icon"></span> -->
-              <img src="img/dora-6.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-          </div>
-          <div class="col-md-4 element-animate">
-            <a class="link-thumbnail">
-              <!-- <h3>Beagle</h3>
-              <span class="ion-plus icon"></span> -->
-              <img src="img/dora-7.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-          </div>
-          <div class="col-md-4 element-animate">
-            <a class="link-thumbnail">
-              <!-- <h3>Golden Retriever</h3>
-              <span class="ion-plus icon"></span> -->
-              <img src="img/dora-8.jpg" alt="Image placeholder" class="img-fluid">
-            </a>
-          </div>
-        </div>
-        
-      </div>
-    </section>
-    <!-- END section -->
-
-    <section class="section blog">
-      <div class="container">
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-        <div class="row justify-content-center mb-5 element-animate">
-          <div class="col-md-8 text-center">
-            <h2 class=" heading mb-4" id="blog-info" >Recent Blog Post</h2>
-            <p class="mb-5 lead">No posts found.</p>
-          </div>
-        </div>
-
-        <!-- <div class="row">
-          <div class="col-md-6">
-
-            <div class="media mb-4 d-md-flex d-block element-animate">
-              <a href="#" class="mr-5"><img src="img/blog_1.jpg" alt="Placeholder image" class="img-fluid"></a>
-              <div class="media-body">
-                <span class="post-meta">Feb 26th, 2018</span>
-                <h3 class="mt-2 text-black"><a href="#">How to Train Your Dog</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam minus ipsa earum nemo consectetur cupiditate necessitatibus suscipit assumenda perspiciatis provident.</p>
-                <p><a href="#" class="btn btn-primary btn-sm">Read more</a></p>
-              </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <div class="gallery-item relative overflow-hidden rounded-xl aspect-square fade-in cursor-pointer">
+          <img src="img/dora-2-new.jpg" alt="Dora" class="w-full h-full object-cover">
+          <div class="overlay absolute inset-0 bg-amber-500/15 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
             </div>
-
-
-
-          </div>
-          <div class="col-md-6">
-            <div class="media mb-4 d-md-flex d-block element-animate">
-              <a href="#" class="mr-5"><img src="img/blog_2.jpg" alt="Placeholder image" class="img-fluid"></a>
-              <div class="media-body">
-                <span class="post-meta">Feb 26th, 2018</span>
-                <h3 class="mt-2 text-black"><a href="#">Find The Right Food For Your Dogs</a></h3>
-                <p><a href="#" class="btn btn-primary btn-sm">Read more</a></p>
-              </div>
-            </div>
-
-            <div class="media mb-4 d-md-flex d-block element-animate">
-              <a href="#" class="mr-5"><img src="img/blog_3.jpg" alt="Placeholder image" class="img-fluid"></a>
-              <div class="media-body">
-                <span class="post-meta">Feb 26th, 2018</span>
-                <h3 class="mt-2 text-black"><a href="#">Dog's Affections To Owner</a></h3>
-                <p><a href="#" class="btn btn-primary btn-sm">Read more</a></p>
-              </div>
-            </div>
-
-          </div> -->
-        </div>
-      </div>
-    </section>
-
-    <footer class="site-footer" role="contentinfo">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-4 mb-5">
-            <h3>About My Pet Dora</h3>
-            <p class="mb-5">This page was created in order to create a profile of our pet we love so much, but also to provide more contact
-            information in case Dora is lost, as there is a QR Code on her collar directing to this site. Cool right?</p>
-            <!-- <ul class="list-unstyled footer-link d-flex footer-social">
-              <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
-            </ul> -->
-
-          </div>
-          <div class="col-md-5 mb-5">
-            <h3 id="contact-info">Contact Info</h3>
-            <ul class="list-unstyled footer-link">
-              <li class="d-block">
-                <span class="d-block">Address:</span>
-                <span class="text-white">Berlin, Germany</span></li>
-              <li class="d-block"><span class="d-block">Telephone:</span><span class="text-white">+49 0157 85116494</span></li>
-              <li class="d-block"><span class="d-block">Email:</span><span class="text-white">mypetdora@gmail.com</span></li>
-            </ul>
-          </div>
-          <!-- <div class="col-md-3 mb-5">
-            <h3>Quick Links</h3>
-            <ul class="list-unstyled footer-link">
-              <li><a href="#">About</a></li>
-              <li><a href="#">Terms of Use</a></li>
-              <li><a href="#">Disclaimers</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div> -->
-          <div class="col-md-3">
-          
           </div>
         </div>
-        <div class="row">
-          <div class="col-12 text-md-center text-left">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-            <p> Thanks! <a href="https://colorlib.com" target="_blank">Colorlib</a> </p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        <div class="gallery-item relative overflow-hidden rounded-xl aspect-square fade-in cursor-pointer">
+          <img src="img/dora-4.jpg" alt="Dora" class="w-full h-full object-cover">
+          <div class="overlay absolute inset-0 bg-amber-500/15 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item relative overflow-hidden rounded-xl aspect-square fade-in cursor-pointer">
+          <img src="img/dora-5.jpg" alt="Dora" class="w-full h-full object-cover">
+          <div class="overlay absolute inset-0 bg-amber-500/15 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item relative overflow-hidden rounded-xl aspect-square fade-in cursor-pointer">
+          <img src="img/dora-6.jpg" alt="Dora" class="w-full h-full object-cover">
+          <div class="overlay absolute inset-0 bg-amber-500/15 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item relative overflow-hidden rounded-xl aspect-square fade-in cursor-pointer">
+          <img src="img/dora-7.jpg" alt="Dora" class="w-full h-full object-cover">
+          <div class="overlay absolute inset-0 bg-amber-500/15 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item relative overflow-hidden rounded-xl aspect-square fade-in cursor-pointer">
+          <img src="img/dora-8.jpg" alt="Dora" class="w-full h-full object-cover">
+          <div class="overlay absolute inset-0 bg-amber-500/15 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
-    <!-- END footer -->
+    </div>
+  </section>
 
-    <!-- loader -->
-    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 md:py-36">
+    <div class="max-w-lg mx-auto px-6 text-center fade-in">
+      <p class="text-amber-500 font-semibold text-xs tracking-[0.3em] uppercase mb-4">Get in Touch</p>
+      <h2 class="text-4xl md:text-5xl font-bold mb-5" id="contact-info">Contact Info</h2>
+      <div class="w-10 h-1 bg-amber-500 mx-auto mb-12 rounded-full"></div>
+      <div class="space-y-5">
+        <div class="flex items-center justify-center gap-4 text-stone-600">
+          <div class="w-11 h-11 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <span class="text-lg">Porto, Portugal</span>
+        </div>
+        <div class="flex items-center justify-center gap-4 text-stone-600">
+          <div class="w-11 h-11 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <a href="mailto:mypetdora@gmail.com" class="text-lg hover:text-amber-500 transition-colors">mypetdora@gmail.com</a>
+        </div>
+      </div>
+      <p class="mt-14 text-stone-400 text-sm leading-relaxed">This page was created to share our beloved Dora with the world, and to provide contact information in case she is ever lost. There is a QR code on her collar linking here.</p>
+    </div>
+  </section>
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+  <!-- FOOTER -->
+  <footer class="bg-stone-900 text-stone-500 py-8">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+      <p>&copy; <span id="year"></span> My Pet Dora &mdash; Porto, Portugal</p>
+    </div>
+  </footer>
+
+  <script>
+    // Hero slideshow
+    const slides = ['img/dora-1.jpg', 'img/dora-3.jpg'];
+    const dots = document.querySelectorAll('.hero-dot');
+    const heroBg = document.getElementById('hero-bg');
+    let current = 0;
+
+    function goToSlide(i) {
+      current = i;
+      heroBg.style.backgroundImage = `url('${slides[i]}')`;
+      dots.forEach((d, idx) => {
+        d.classList.toggle('bg-white/80', idx === i);
+        d.classList.toggle('scale-125', idx === i);
+        d.classList.toggle('bg-white/30', idx !== i);
+        d.classList.toggle('scale-100', idx !== i);
+      });
+    }
+
+    dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
+    setInterval(() => goToSlide((current + 1) % slides.length), 5000);
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', isOpen);
+      iconOpen.classList.toggle('hidden', !isOpen);
+      iconClose.classList.toggle('hidden', isOpen);
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    }
+
+    // Scroll fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
